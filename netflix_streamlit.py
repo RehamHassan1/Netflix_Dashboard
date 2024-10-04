@@ -116,7 +116,7 @@ with trendline_chart:
                 )
     )
 with bar2:
-    # st.subheader('Top 10 Directors')
+    st.subheader('Top 10 Directors')
     value=st.radio('Select top 10 directors in',['Both','Movie','TV Show'],horizontal=True)
     if (value=='Both'):
         value=['Movie','TV Show']
@@ -134,5 +134,5 @@ with bar2:
             color='type',
             color_discrete_sequence=['#B7E0FF', '#E78F81'],
             labels={'count': 'Count', 'director': 'Director','type':'Type'},
-            title='Top 10 Directors'
+           
         ))
