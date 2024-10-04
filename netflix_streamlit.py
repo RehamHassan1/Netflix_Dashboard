@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 st.set_page_config(page_title="Netflix Dashboard", layout="wide")
 st.title("Netflix Data Analysis")
-df= pd.read_csv("D:\\AI_track\\archive\\netflix1.csv")
+df= pd.read_csv('netflix1.csv')
 df2 = df[['show_id', 'title', 'country', 'type']]
 df2.dropna(subset=['country'], inplace=True)
 types = df2['type'].value_counts().reset_index()
