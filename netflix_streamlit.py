@@ -11,12 +11,8 @@ df2 = df[['show_id', 'title', 'country', 'type']]
 df2.dropna(subset=['country'], inplace=True)
 types = df2['type'].value_counts().reset_index()
 types.columns = ['type', 'count']
-#col2, col1,category_chart,trendline_chart = st.columns(4,vertical_alignment="bottom")  
-col2,  category_chart,col1=st.columns([2,2,1],vertical_alignment="bottom")
+col2,  category_chart,col1=st.columns([2,2,1])
 trendline_chart,bar2=st.columns(2)
-
-#col2, col1= st.columns([2, 1], gap="small")
-#category_chart,trendline_chart = col1.columns([1, 2])
 with col1:
     st.subheader('Distribution of Movies and TV Shows')
     fig, ax = plt.subplots(figsize=(4, 4))  
@@ -31,7 +27,7 @@ with col1:
     ax.set_facecolor('none') 
     st.pyplot(fig)
 with col2:
-    #st.subheader('Movies & Shows by Countries')
+    st.subheader('Movies & Shows by Countries')
     country_count = df2['country'].value_counts().reset_index()
     country_count.columns = ['country', 'count']
     fig = px.scatter_geo(country_count, 
@@ -41,7 +37,7 @@ with col2:
                          hover_name="country",
                          size="count",
                          projection="natural earth",
-                         title="Movies & Shows by Countries",
+                         #title="Movies & Shows by Countries",
                          color_continuous_scale='orrd')
     fig.update_geos(
         showcoastlines=True, coastlinecolor="#656565",  
@@ -58,7 +54,7 @@ with col2:
         geo=dict(
             bgcolor="rgba(0, 0, 0, 0)"  
         ),
-        title_font=dict(size=14 , color="white", family="Arial")  
+        #title_font=dict(size=14 , color="white", family="Arial")  
     )
     st.plotly_chart(fig, use_container_width=True)  
 st.markdown(
@@ -73,7 +69,7 @@ st.markdown(
 )
 
 with category_chart:
-    #st.subheader('Most Common Categories in Movies and TV Shows by Type')
+    st.subheader('Most Common Categories in Movies and TV Shows by Type')
     #split the data in listed column and add category column to database to descibe each category
     df_split=df.assign(category=df['listed_in'].str.split(', ')).explode('category')
     #get the count of each category
