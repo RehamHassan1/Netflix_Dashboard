@@ -4,7 +4,8 @@ import plotly.express as px
 import matplotlib.pyplot as plt
 
 st.set_page_config(page_title="Netflix Dashboard", layout="wide")
-st.title("Netflix Data Analysis")
+st.markdown("<h1 style='text-align: center;'>Netflix Data Analysis</h1>", unsafe_allow_html=True)
+st.divider()
 df= pd.read_csv('netflix1.csv')
 df2 = df[['show_id', 'title', 'country', 'type']]
 df2.dropna(subset=['country'], inplace=True)
