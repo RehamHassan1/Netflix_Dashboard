@@ -239,3 +239,17 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+
+col1,col2,col3=st.columns(3)
+with col1:
+    st.plotly_chart(px.histogram(df,'rating',color='type',color_discrete_sequence=['#E78F81','#B7E0FF']))
+    
+with col2:
+    durations = df.groupby(['duration', 'type'])['duration'].value_counts().reset_index()
+    MovieDurations = durations[durations['type'] == 'Movie'].sort_values(by='count', ascending=False)
+    st.plotly_chart(px.line(MovieDurations,x='duration',y='count',title='Movie Duration',color_discrete_sequence=['#E78F81']))
+with col3:
+    TVshowsDurations = durations[durations['type'] == 'TV Show'].sort_values(by='count', ascending=False)
+    st.plotly_chart(px.line(TVshowsDurations,x='duration',y='count',title='TV shows Durations'))
+
+
