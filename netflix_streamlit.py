@@ -168,11 +168,6 @@ with Geo_chart:
 
     # Continent Selection for Geo Chart
     selected_continent = st.selectbox('Select Continent', options=df2['continent'].unique())
-    flag = bool(selected_continent)
-
-    if not flag:
-        selected_continent = df2['continent'].unique()
-
     # Filter data by selected continent
     filtered_data = df2[df2['continent'].isin([selected_continent])]
     country_count = filtered_data['country'].value_counts().reset_index()
@@ -185,17 +180,31 @@ with Geo_chart:
     )
 
     # Update Geo Chart based on continent selection
-    if flag:
-        fig.update_geos(visible=False)
+   
+    fig.update_geos(visible=False)
 
-        # Update ranges based on continent
-        if 'North America' in selected_continent:
-            fig.update_geos(lonaxis=dict(range=(-170, -50)), lataxis=dict(range=(20, 50)))
-        elif 'South America' in selected_continent:
-            fig.update_geos(lonaxis=dict(range=(-80, -30)), lataxis=dict(range=(-60, 15)))
-        elif 'Europe' in selected_continent:
-            fig.update_geos(lonaxis=dict(range=(-30, 50)), lataxis=dict(range=(35, 70)))
-        # Add ranges for other continents...
+    # Update ranges based on continent
+    if 'North America' in selected_continent:
+        fig.update_geos(lonaxis=dict(range=(-170, -50)), lataxis=dict(range=(20, 50)))
+    elif 'South America' in selected_continent:
+        fig.update_geos(lonaxis=dict(range=(-80, -30)), lataxis=dict(range=(-60, 15)))
+    elif 'Europe' in selected_continent:
+        fig.update_geos(lonaxis=dict(range=(-30, 50)), lataxis=dict(range=(35, 70)))
+    elif 'Africa' in selected_continent:
+        fig.update_geos(
+            lonaxis=dict(range=(-20, 50)),
+            lataxis=dict(range=(-40, 40))
+        )
+    elif 'Asia' in selected_continent:
+        fig.update_geos(
+            lonaxis=dict(range=(30, 180)),
+            lataxis=dict(range=(-10, 60))
+        )
+    elif 'Oceania' in selected_continent:
+        fig.update_geos(
+            lonaxis=dict(range=(110, 180)),
+            lataxis=dict(range=(-50, -10))
+        )
 
     fig.update_geos(
         showcoastlines=True, coastlinecolor="black", showcountries=True, countrycolor="gray",
